@@ -9,11 +9,14 @@ class AppMainScreen extends StatefulWidget {
 }
 
 class _AppMainScreenState extends State<AppMainScreen> {
+  int selectedIndex = 0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
       bottomNavigationBar: BottomNavigationBar(
+        currentIndex: selectedIndex,
         backgroundColor: Colors.green,
         elevation: 0,
         iconSize: 28,
@@ -24,6 +27,11 @@ class _AppMainScreenState extends State<AppMainScreen> {
           color: Colors.red,
           fontWeight: FontWeight.w600,
         ),
+        onTap: (index) {
+          setState(() {
+            selectedIndex = index;
+          });
+        },
         items: [
           BottomNavigationBarItem(icon: Icon(Iconsax.home5), label: "Home"),
           BottomNavigationBarItem(
