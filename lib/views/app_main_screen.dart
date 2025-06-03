@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:recipe_app/views/mt_home_screen.dart';
 
 class AppMainScreen extends StatefulWidget {
   const AppMainScreen({super.key});
@@ -10,6 +11,17 @@ class AppMainScreen extends StatefulWidget {
 
 class _AppMainScreenState extends State<AppMainScreen> {
   int selectedIndex = 0;
+  late final List<Widget> page;
+  @override
+  void initState() {
+    this.page = [
+      const MyHomeScreen(),
+      navBarPage(Iconsax.heart5),
+      navBarPage(Iconsax.calendar5),
+      navBarPage(Iconsax.setting_21),
+    ];
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -33,21 +45,33 @@ class _AppMainScreenState extends State<AppMainScreen> {
           });
         },
         items: [
-          BottomNavigationBarItem(icon: Icon(Iconsax.home5), label: "Home"),
           BottomNavigationBarItem(
-            icon: Icon(Iconsax.heart5),
+            icon: Icon(selectedIndex == 0 ? Iconsax.home5 : Iconsax.home1),
+            label: "Home",
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(selectedIndex == 1 ? Iconsax.heart5 : Iconsax.heart),
             label: "Favorite",
           ),
           BottomNavigationBarItem(
-            icon: Icon(Iconsax.calendar5),
+            icon: Icon(
+              selectedIndex == 2 ? Iconsax.calendar5 : Iconsax.calendar,
+            ),
             label: "Meal plan",
           ),
           BottomNavigationBarItem(
-            icon: Icon(Iconsax.setting_21),
+            icon: Icon(
+              selectedIndex == 3 ? Iconsax.setting_21 : Iconsax.setting_2,
+            ),
             label: "Setting",
           ),
         ],
       ),
+      body: page[selectedIndex],
     );
+  }
+
+  navBarPage(iconName) {
+    return Center(child: Icon(iconName, size: 100, color: Colors.purpleAccent));
   }
 }
