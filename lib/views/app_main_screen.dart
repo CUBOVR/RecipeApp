@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:recipe_app/core/styles.dart';
 import 'package:recipe_app/views/mt_home_screen.dart';
 
 class AppMainScreen extends StatefulWidget {
@@ -29,11 +30,11 @@ class _AppMainScreenState extends State<AppMainScreen> {
       backgroundColor: Colors.white,
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: selectedIndex,
-        backgroundColor: Colors.green,
+        backgroundColor: Colors.white,
         elevation: 0,
         iconSize: 28,
-        selectedItemColor: Colors.white,
-        unselectedItemColor: Colors.lime,
+        selectedItemColor: kBannerColor,
+        unselectedItemColor: Colors.grey.shade700,
         type: BottomNavigationBarType.fixed,
         selectedLabelStyle: TextStyle(
           color: Colors.red,
