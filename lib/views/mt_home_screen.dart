@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:recipe_app/core/styles.dart';
+import 'package:recipe_app/data/conectionJSON.dart';
+import 'package:recipe_app/data/models/infoRecipesModel.dart';
 import 'package:recipe_app/widget/banner.dart';
 import 'package:recipe_app/widget/icon_button.dart';
 
@@ -11,8 +14,11 @@ class MyHomeScreen extends StatefulWidget {
 }
 
 class _MyHomeScreenState extends State<MyHomeScreen> {
+  //for category
   String category = "All";
   final List<String> categoriesItems = ["All", "Dinner", "Lunch", "Breakfast"];
+  //for all items display
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,6 +49,7 @@ class _MyHomeScreenState extends State<MyHomeScreen> {
                     ),
                     //for category
                     selectedCategory(),
+                    SizedBox(height: 140),
                     Text(
                       "Quick & Easy",
                       style: TextStyle(
@@ -51,8 +58,24 @@ class _MyHomeScreenState extends State<MyHomeScreen> {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
+                    TextButton(
+                      onPressed: () {
+                        // the function is coming
+                      },
+                      child: Text(
+                        "View all",
+                        style: TextStyle(
+                          color: kBannerColor,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ),
                   ],
                 ),
+              ),
+              Padding(
+                padding: EdgeInsets.only(top: 5, left: 15),
+                child: SingleChildScrollView(child: Row()),
               ),
             ],
           ),
@@ -76,7 +99,7 @@ class _MyHomeScreenState extends State<MyHomeScreen> {
                 borderRadius: BorderRadius.circular(25),
                 color:
                     category == categoriesItems[index]
-                        ? Colors.cyan
+                        ? kBannerColor
                         : Colors.white,
               ),
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
