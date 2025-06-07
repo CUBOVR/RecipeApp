@@ -11,10 +11,12 @@ class MyHomeScreen extends StatefulWidget {
 }
 
 class _MyHomeScreenState extends State<MyHomeScreen> {
+  String category = "All";
+  final List<String> categoriesItems = ["All", "Dinner", "Lunch", "Breakfast"];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.blueGrey,
+      backgroundColor: Color(0xFFDDDDDD),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
@@ -40,10 +42,56 @@ class _MyHomeScreenState extends State<MyHomeScreen> {
                       ),
                     ),
                     //for category
+                    selectedCategory(),
+                    Text(
+                      "Quick & Easy",
+                      style: TextStyle(
+                        fontSize: 20,
+                        wordSpacing: 0.1,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
                   ],
                 ),
               ),
             ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  SingleChildScrollView selectedCategory() {
+    return SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      child: Row(
+        children: List.generate(
+          categoriesItems.length,
+          (index) => GestureDetector(
+            onTap: () {
+              setState(() => category = categoriesItems[index]);
+            },
+            child: Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(25),
+                color:
+                    category == categoriesItems[index]
+                        ? Colors.cyan
+                        : Colors.white,
+              ),
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+              margin: const EdgeInsets.only(right: 20),
+              child: Text(
+                "${categoriesItems[index]}",
+                style: TextStyle(
+                  color:
+                      category == categoriesItems[index]
+                          ? Colors.white
+                          : Colors.grey.shade600,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+            ),
           ),
         ),
       ),
