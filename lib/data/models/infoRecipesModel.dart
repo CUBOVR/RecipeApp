@@ -11,15 +11,21 @@ class InfoRecipesModel {
 
   factory InfoRecipesModel.fromJSON(Map<String, dynamic> json) {
     return InfoRecipesModel(
-      recipes: List<RecipesModel>.from(json["Recipes"]),
-      category: List<Categories>.from(json["App-Category"]),
+      recipes:
+          (json["Recipes"] as List)
+              .map((e) => RecipesModel.fromJSON(e))
+              .toList(),
+      category:
+          (json["App-Category"] as List)
+              .map((e) => Categories.fromJSON(e))
+              .toList(),
     );
   }
 }
 
 class RecipesModel {
   final String title;
-  final RatingInfo rating;
+  // final RatingInfo rating;
   final String url;
   final String image;
   final String category;
@@ -30,7 +36,7 @@ class RecipesModel {
 
   RecipesModel({
     required this.title,
-    required this.rating,
+    // required this.rating,
     required this.url,
     required this.image,
     required this.category,
@@ -43,14 +49,14 @@ class RecipesModel {
   factory RecipesModel.fromJSON(Map<String, dynamic> json) {
     return RecipesModel(
       title: json["title"],
-      rating: json["rating"],
+      // rating: json["rating"],
       url: json["url"],
       image: json["image"]["url"],
       category: json["category"],
       description: json["description"],
       published: json["published"],
       authorName: json["authorName"],
-      terms: List<Terms>.from(json["terms"]),
+      terms: (json["terms"] as List).map((e) => Terms.fromJSON(e)).toList(),
     );
   }
 }
@@ -74,7 +80,7 @@ class RatingInfo {
 
   factory RatingInfo.fromJSON(Map<String, dynamic> json) {
     return RatingInfo(
-      ratingValue: json["ratinValue"],
+      ratingValue: json["ratingValue"],
       ratingCount: json["ratingCount"],
       commentCount: json["commentCount"],
       ratingTypeLabel: json["ratingTypeLabel"],

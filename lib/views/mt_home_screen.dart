@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:recipe_app/core/styles.dart';
-import 'package:recipe_app/data/conectionJSON.dart';
+import 'package:recipe_app/data/connectionJson.dart';
 import 'package:recipe_app/data/models/infoRecipesModel.dart';
 import 'package:recipe_app/widget/banner.dart';
 import 'package:recipe_app/widget/icon_button.dart';
@@ -14,9 +14,10 @@ class MyHomeScreen extends StatefulWidget {
 }
 
 class _MyHomeScreenState extends State<MyHomeScreen> {
+  final Future<InfoRecipesModel?>? _appRecipesInfo =
+      ConnectionJson().loadAppInfo();
   //for category
   String category = "All";
-  final List<String> categoriesItems = ["All", "Dinner", "Lunch", "Breakfast"];
   //for all items display
 
   @override
@@ -84,40 +85,56 @@ class _MyHomeScreenState extends State<MyHomeScreen> {
     );
   }
 
-  SingleChildScrollView selectedCategory() {
-    return SingleChildScrollView(
-      scrollDirection: Axis.horizontal,
-      child: Row(
-        children: List.generate(
-          categoriesItems.length,
-          (index) => GestureDetector(
-            onTap: () {
-              setState(() => category = categoriesItems[index]);
-            },
-            child: Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(25),
-                color:
-                    category == categoriesItems[index]
-                        ? kBannerColor
-                        : Colors.white,
-              ),
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-              margin: const EdgeInsets.only(right: 20),
-              child: Text(
-                "${categoriesItems[index]}",
-                style: TextStyle(
-                  color:
-                      category == categoriesItems[index]
-                          ? Colors.white
-                          : Colors.grey.shade600,
-                  fontWeight: FontWeight.w600,
+  FutureBuilder<InfoRecipesModel?> selectedCategory() {
+    return FutureBuilder(
+      future: _appRecipesInfo,
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const Center(child: CircularProgressIndicator());
+        } else if (snapshot.hasError) {
+          return Center(child: Text("Error: ${snapshot.error}"));
+        } else if (!snapshot.hasData) {
+          return const Center(child: Text("No se encontraron datos"));
+        }
+        var categoriesItems = snapshot.data!.category;
+        return SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: Row(
+            children: List.generate(
+              snapshot.data!.category.length,
+              (index) => GestureDetector(
+                onTap: () {
+                  setState(() => category = categoriesItems[index].name);
+                },
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(25),
+                    color:
+                        category == categoriesItems[index].name
+                            ? kBannerColor
+                            : Colors.white,
+                  ),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 20,
+                    vertical: 10,
+                  ),
+                  margin: const EdgeInsets.only(right: 20),
+                  child: Text(
+                    categoriesItems[index].name,
+                    style: TextStyle(
+                      color:
+                          category == categoriesItems[index].name
+                              ? Colors.white
+                              : Colors.grey.shade600,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
                 ),
               ),
             ),
           ),
-        ),
-      ),
+        );
+      },
     );
   }
 
