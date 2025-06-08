@@ -25,7 +25,7 @@ class InfoRecipesModel {
 
 class RecipesModel {
   final String title;
-  // final RatingInfo rating;
+  final RatingInfo rating;
   final String url;
   final String image;
   final String category;
@@ -36,7 +36,7 @@ class RecipesModel {
 
   RecipesModel({
     required this.title,
-    // required this.rating,
+    required this.rating,
     required this.url,
     required this.image,
     required this.category,
@@ -49,7 +49,7 @@ class RecipesModel {
   factory RecipesModel.fromJSON(Map<String, dynamic> json) {
     return RecipesModel(
       title: json["title"],
-      // rating: json["rating"],
+      rating: RatingInfo.fromJSON(json["rating"]),
       url: json["url"],
       image: json["image"]["url"],
       category: json["category"],
@@ -63,8 +63,8 @@ class RecipesModel {
 
 class RatingInfo {
   final double ratingValue;
-  final Int ratingCount;
-  final Int commentCount;
+  final int ratingCount;
+  final int commentCount;
   final String ratingTypeLabel;
   final bool hasRatingCount;
   final bool isHalfStar;
@@ -80,7 +80,7 @@ class RatingInfo {
 
   factory RatingInfo.fromJSON(Map<String, dynamic> json) {
     return RatingInfo(
-      ratingValue: json["ratingValue"],
+      ratingValue: (json["ratingValue"]).toDouble(),
       ratingCount: json["ratingCount"],
       commentCount: json["commentCount"],
       ratingTypeLabel: json["ratingTypeLabel"],
