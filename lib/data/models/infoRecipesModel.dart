@@ -90,6 +90,14 @@ class RatingInfo {
   }
 }
 
+String? getDisplayTerm(List<Terms> terms, String tipoBuscado) {
+  final term = terms.firstWhere(
+    (term) => term.slug == tipoBuscado,
+    orElse: () => Terms(slug: "", display: ""),
+  );
+  return term.slug.isNotEmpty ? term.display : null;
+}
+
 class Terms {
   final String slug;
   final String display;

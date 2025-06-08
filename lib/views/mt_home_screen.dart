@@ -4,6 +4,7 @@ import 'package:recipe_app/core/styles.dart';
 import 'package:recipe_app/data/connectionJson.dart';
 import 'package:recipe_app/data/models/infoRecipesModel.dart';
 import 'package:recipe_app/widget/banner.dart';
+import 'package:recipe_app/widget/food_items_display.dart';
 import 'package:recipe_app/widget/icon_button.dart';
 
 class MyHomeScreen extends StatefulWidget {
@@ -14,11 +15,27 @@ class MyHomeScreen extends StatefulWidget {
 }
 
 class _MyHomeScreenState extends State<MyHomeScreen> {
-  final Future<InfoRecipesModel?>? _appRecipesInfo =
-      ConnectionJson().loadAppInfo();
+  Future<InfoRecipesModel?>? _appRecipesInfo;
+  ConnectionJson repository = ConnectionJson();
   //for category
   String category = "All";
   //for all items display
+  List<RecipesModel> _allRecipes = [];
+  List<RecipesModel> _filteredRecipes = [];
+
+  @override
+  void initState() {
+    super.initState();
+    _appRecipesInfo = repository.loadAppInfo();
+    _appRecipesInfo!.then((data) {
+      if (data != null) {
+        setState(() {
+          _allRecipes = data.recipes;
+          _filteredRecipes = (data.recipes).toList();
+        });
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -29,6 +46,7 @@ class _MyHomeScreenState extends State<MyHomeScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              const SizedBox(height: 10),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 15),
                 child: Column(
@@ -50,33 +68,62 @@ class _MyHomeScreenState extends State<MyHomeScreen> {
                     ),
                     //for category
                     selectedCategory(),
-                    SizedBox(height: 140),
-                    Text(
-                      "Quick & Easy",
-                      style: TextStyle(
-                        fontSize: 20,
-                        wordSpacing: 0.1,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    TextButton(
-                      onPressed: () {
-                        // the function is coming
-                      },
-                      child: Text(
-                        "View all",
-                        style: TextStyle(
-                          color: kBannerColor,
-                          fontWeight: FontWeight.w600,
+                    SizedBox(height: 10),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          "Quick & Easy",
+                          style: TextStyle(
+                            fontSize: 20,
+                            wordSpacing: 0.1,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
-                      ),
+                        TextButton(
+                          onPressed: () {
+                            // the function is coming
+                          },
+                          child: Text(
+                            "View all",
+                            style: TextStyle(
+                              color: kBannerColor,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ],
                 ),
               ),
-              Padding(
-                padding: EdgeInsets.only(top: 5, left: 15),
-                child: SingleChildScrollView(child: Row()),
+              FutureBuilder(
+                future: _appRecipesInfo,
+                builder: (context, snapshot) {
+                  if (snapshot.hasData) {
+                    final List<RecipesModel> recipes =
+                        snapshot.data?.recipes ?? [];
+                    return Padding(
+                      padding: EdgeInsets.only(top: 5, left: 15),
+                      child: SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: Row(
+                          children:
+                              recipes
+                                  .map((e) => FoodItemsDisplay(recipe: e))
+                                  .toList(),
+                        ),
+                      ),
+                    );
+                  } else if (snapshot.connectionState ==
+                      ConnectionState.waiting) {
+                    return const Center(child: CircularProgressIndicator());
+                  } else if (snapshot.hasError) {
+                    return Center(child: Text("Error: ${snapshot.error}"));
+                  } else {
+                    return const Center(child: Text("No se encontraron datos"));
+                  }
+                },
               ),
             ],
           ),
@@ -104,7 +151,13 @@ class _MyHomeScreenState extends State<MyHomeScreen> {
               snapshot.data!.category.length,
               (index) => GestureDetector(
                 onTap: () {
-                  setState(() => category = categoriesItems[index].name);
+                  setState(() {
+                    category = categoriesItems[index].name;
+                    _filteredRecipes =
+                        snapshot.data!.recipes
+                            .where((recipe) => recipe.category == category)
+                            .toList();
+                  });
                 },
                 child: Container(
                   decoration: BoxDecoration(
