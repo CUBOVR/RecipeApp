@@ -3,6 +3,7 @@ import 'package:iconsax/iconsax.dart';
 import 'package:recipe_app/core/styles.dart';
 import 'package:recipe_app/data/connectionJson.dart';
 import 'package:recipe_app/data/models/infoRecipesModel.dart';
+import 'package:recipe_app/views/view_all_items.dart';
 import 'package:recipe_app/widget/banner.dart';
 import 'package:recipe_app/widget/food_items_display.dart';
 import 'package:recipe_app/widget/icon_button.dart';
@@ -82,7 +83,12 @@ class _MyHomeScreenState extends State<MyHomeScreen> {
                         ),
                         TextButton(
                           onPressed: () {
-                            // the function is coming
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (_) => const ViewAllItems(),
+                              ),
+                            );
                           },
                           child: Text(
                             "View all",

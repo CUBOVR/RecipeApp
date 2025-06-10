@@ -40,6 +40,7 @@ class _FoodItemsDisplayState extends State<FoodItemsDisplay> {
                 Text(
                   widget.recipe.title,
                   style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
+                  overflow: TextOverflow.ellipsis,
                 ),
                 SizedBox(height: 5),
                 Wrap(
