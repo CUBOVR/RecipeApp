@@ -12,16 +12,6 @@ class ConnectionJson {
     return InfoRecipesModel.fromJSON(jsonData);
   }
 
-  Future<void> saveFavoriteStatus(String productId, bool isFavorite) async {
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setBool('favorite_$productId', isFavorite);
-  }
-
-  Future<bool> getFavoriteStatus(String productId) async {
-    final prefs = await SharedPreferences.getInstance();
-    return prefs.getBool('favorite_$productId') ?? false;
-  }
-
   Future<Map<String, dynamic>> getCombinedData() async {
     final data = await loadAppInfo();
     final prefs = await SharedPreferences.getInstance();

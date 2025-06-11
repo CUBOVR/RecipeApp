@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:recipe_app/Provider/favorite_provider.dart';
 import 'package:recipe_app/views/app_main_screen.dart';
 
 void main() {
@@ -10,6 +12,9 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(home: AppMainScreen());
+    return MultiProvider(
+      providers: [ChangeNotifierProvider(create: (_) => FavoriteProvider())],
+      child: const MaterialApp(home: AppMainScreen()),
+    );
   }
 }

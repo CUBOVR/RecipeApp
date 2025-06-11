@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:provider/provider.dart';
+import 'package:recipe_app/Provider/favorite_provider.dart';
 import 'package:recipe_app/core/styles.dart';
 import 'package:recipe_app/data/models/infoRecipesModel.dart';
 
@@ -14,6 +16,7 @@ class FoodItemsDisplay extends StatefulWidget {
 class _FoodItemsDisplayState extends State<FoodItemsDisplay> {
   @override
   Widget build(BuildContext context) {
+    final provider = FavoriteProvider.of(context);
     return GestureDetector(
       onTap: () {},
       child: Container(
@@ -62,10 +65,17 @@ class _FoodItemsDisplayState extends State<FoodItemsDisplay> {
                 radius: 18,
                 backgroundColor: kBannerColor,
                 child: InkWell(
-                  onTap: () {},
-                  child: const Icon(
-                    Iconsax.heart,
-                    color: Colors.white,
+                  onTap: () {
+                    provider.toggleFavorite(widget.recipe);
+                  },
+                  child: Icon(
+                    provider.isExist(widget.recipe)
+                        ? Iconsax.heart5
+                        : Iconsax.heart,
+                    color:
+                        provider.isExist(widget.recipe)
+                            ? Colors.red
+                            : Colors.white,
                     size: 20,
                   ),
                 ),
