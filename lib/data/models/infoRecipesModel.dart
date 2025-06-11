@@ -33,6 +33,7 @@ class RecipesModel {
   final String published;
   final String authorName;
   final List<Terms> terms;
+  final String id;
 
   RecipesModel({
     required this.title,
@@ -44,6 +45,7 @@ class RecipesModel {
     required this.published,
     required this.authorName,
     required this.terms,
+    required this.id,
   });
 
   factory RecipesModel.fromJSON(Map<String, dynamic> json) {
@@ -57,6 +59,7 @@ class RecipesModel {
       published: json["published"],
       authorName: json["authorName"],
       terms: (json["terms"] as List).map((e) => Terms.fromJSON(e)).toList(),
+      id: json["id"],
     );
   }
 }

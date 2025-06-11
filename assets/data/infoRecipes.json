@@ -2,6 +2,7 @@
   "Recipes": [
     {
       "title": "Easy chicken curry",
+      "favorite": false,
       "headingStyledSize": 4,
       "showTitleIcon": false,
       "showOverlayIcon": true,
@@ -54,6 +55,7 @@
     },
     {
       "title": "Chicken pasta bake",
+      "favorite": false,
       "headingStyledSize": 4,
       "showTitleIcon": false,
       "showOverlayIcon": false,
@@ -102,6 +104,7 @@
     },
     {
       "title": "Vegetarian lasagne",
+      "favorite": false,
       "headingStyledSize": 4,
       "showTitleIcon": false,
       "showOverlayIcon": true,
@@ -154,6 +157,7 @@
     },
     {
       "title": "Sausage ragu",
+      "favorite": false,
       "headingStyledSize": 4,
       "showTitleIcon": false,
       "showOverlayIcon": true,
@@ -202,6 +206,7 @@
     },
     {
       "title": "Sweet potato & peanut curry",
+      "favorite": false,
       "headingStyledSize": 4,
       "showTitleIcon": false,
       "showOverlayIcon": false,
@@ -258,6 +263,7 @@
     },
     {
       "title": "Chicken and sweet potato traybake",
+      "favorite": false,
       "headingStyledSize": 4,
       "showTitleIcon": false,
       "showOverlayIcon": false,
@@ -306,6 +312,7 @@
     },
     {
       "title": "American pancakes",
+      "favorite": false,
       "headingStyledSize": 4,
       "showTitleIcon": false,
       "showOverlayIcon": true,
@@ -358,6 +365,7 @@
     },
     {
       "title": "Leek & kale hash with sage fried eggs",
+      "favorite": false,
       "headingStyledSize": 4,
       "showTitleIcon": false,
       "showOverlayIcon": false,
@@ -414,6 +422,7 @@
     },
     {
       "title": "Baby pancakes",
+      "favorite": false,
       "headingStyledSize": 4,
       "showTitleIcon": false,
       "showOverlayIcon": false,
@@ -466,6 +475,7 @@
     },
     {
       "title": "Cheese omelette",
+      "favorite": false,
       "headingStyledSize": 4,
       "showTitleIcon": false,
       "showOverlayIcon": false,
@@ -522,6 +532,7 @@
     },
     {
       "title": "Eggs Florentine",
+      "favorite": false,
       "headingStyledSize": 4,
       "showTitleIcon": false,
       "showOverlayIcon": false,
@@ -571,6 +582,7 @@
     },
     {
       "title": "Protein pancakes with banana",
+      "favorite": false,
       "headingStyledSize": 4,
       "showTitleIcon": false,
       "showOverlayIcon": false,
@@ -623,6 +635,7 @@
     },
     {
       "title": "Smashed peas on toast",
+      "favorite": false,
       "headingStyledSize": 4,
       "showTitleIcon": false,
       "showOverlayIcon": false,
@@ -675,6 +688,7 @@
     },
     {
       "title": "Lángos (Hungarian fried bread)",
+      "favorite": false,
       "headingStyledSize": 4,
       "showTitleIcon": false,
       "showOverlayIcon": false,
@@ -723,6 +737,7 @@
     },
     {
       "title": "Poached eggs with smoked salmon and bubble & squeak",
+      "favorite": false,
       "headingStyledSize": 4,
       "showTitleIcon": false,
       "showOverlayIcon": false,
@@ -775,6 +790,7 @@
     },
     {
       "title": "English muffins",
+      "favorite": false,
       "headingStyledSize": 4,
       "showTitleIcon": false,
       "showOverlayIcon": false,
@@ -827,6 +843,7 @@
     },
     {
       "title": "Fried bread",
+      "favorite": false,
       "headingStyledSize": 4,
       "showTitleIcon": false,
       "showOverlayIcon": false,
@@ -875,6 +892,7 @@
     },
     {
       "title": "Air-fryer fry-up",
+      "favorite": false,
       "headingStyledSize": 4,
       "showTitleIcon": false,
       "showOverlayIcon": false,
@@ -923,6 +941,7 @@
     },
     {
       "title": "Overnight oats",
+      "favorite": false,
       "headingStyledSize": 4,
       "showTitleIcon": false,
       "showOverlayIcon": true,
@@ -975,6 +994,7 @@
     },
     {
       "title": "Spiced carrot & lentil soup",
+      "favorite": false,
       "headingStyledSize": 4,
       "showTitleIcon": false,
       "showOverlayIcon": false,
@@ -1031,6 +1051,7 @@
     },
     {
       "title": "Chicken satay salad",
+      "favorite": false,
       "headingStyledSize": 4,
       "showTitleIcon": false,
       "showOverlayIcon": true,
@@ -1083,6 +1104,7 @@
     },
     {
       "title": "Vegan chickpea curry jacket potatoes",
+      "favorite": false,
       "headingStyledSize": 4,
       "showTitleIcon": false,
       "showOverlayIcon": false,
@@ -1139,6 +1161,7 @@
     },
     {
       "title": "Tomato, pepper & bean one pot",
+      "favorite": false,
       "headingStyledSize": 4,
       "showTitleIcon": false,
       "showOverlayIcon": false,
@@ -1189,6 +1212,7 @@
     },
     {
       "title": "Cod with cucumber, avocado & mango salsa salad",
+      "favorite": false,
       "headingStyledSize": 4,
       "showTitleIcon": false,
       "showOverlayIcon": false,
@@ -1245,6 +1269,7 @@
     },
     {
       "title": "Bombay potato frittata",
+      "favorite": false,
       "headingStyledSize": 4,
       "showTitleIcon": false,
       "showOverlayIcon": false,
@@ -1301,6 +1326,7 @@
     },
     {
       "title": "Veggie olive wraps with mustard vinaigrette",
+      "favorite": false,
       "headingStyledSize": 4,
       "showTitleIcon": false,
       "showOverlayIcon": false,
@@ -1357,6 +1383,7 @@
     },
     {
       "title": "Salmon salad with sesame dressing",
+      "favorite": false,
       "headingStyledSize": 4,
       "showTitleIcon": false,
       "showOverlayIcon": false,
@@ -1413,6 +1440,7 @@
     },
     {
       "title": "Quick chicken hummus bowl",
+      "favorite": false,
       "headingStyledSize": 4,
       "showTitleIcon": false,
       "showOverlayIcon": false,
@@ -1461,6 +1489,7 @@
     },
     {
       "title": "Diet cola chicken",
+      "favorite": false,
       "headingStyledSize": 4,
       "showTitleIcon": false,
       "showOverlayIcon": false,
@@ -1509,6 +1538,7 @@
     },
     {
       "title": "Chicken & tzatziki wraps",
+      "favorite": false,
       "headingStyledSize": 4,
       "showTitleIcon": false,
       "showOverlayIcon": false,
@@ -1561,6 +1591,7 @@
     },
     {
       "title": "Pesto spinach penne",
+      "favorite": false,
       "headingStyledSize": 4,
       "showTitleIcon": false,
       "showOverlayIcon": false,
@@ -1617,6 +1648,7 @@
     },
     {
       "title": "Sausage & kale minestrone",
+      "favorite": false,
       "headingStyledSize": 4,
       "showTitleIcon": false,
       "showOverlayIcon": false,
@@ -1669,6 +1701,7 @@
     },
     {
       "title": "Spicy tofu tahini noodle salad",
+      "favorite": false,
       "headingStyledSize": 4,
       "showTitleIcon": false,
       "showOverlayIcon": false,
@@ -1725,6 +1758,7 @@
     },
     {
       "title": "Smoky chickpea salad",
+      "favorite": false,
       "headingStyledSize": 4,
       "showTitleIcon": false,
       "showOverlayIcon": false,
@@ -1781,6 +1815,7 @@
     },
     {
       "title": "Spicy bean & avocado quesadillas",
+      "favorite": false,
       "headingStyledSize": 4,
       "showTitleIcon": false,
       "showOverlayIcon": false,
