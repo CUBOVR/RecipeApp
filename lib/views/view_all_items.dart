@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:recipe_app/core/styles.dart';
 import 'package:recipe_app/data/connectionJson.dart';
 import 'package:recipe_app/data/models/infoRecipesModel.dart';
 import 'package:recipe_app/widget/food_items_display.dart';
@@ -25,9 +26,9 @@ class _ViewAllItemsState extends State<ViewAllItems> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFFDDDDDD),
+      backgroundColor: kBackgroundColor,
       appBar: AppBar(
-        backgroundColor: Color(0xFFDDDDDD),
+        backgroundColor: kBackgroundColor,
         automaticallyImplyLeading: false,
         elevation: 0,
         actions: [

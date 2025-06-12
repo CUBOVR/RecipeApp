@@ -22,7 +22,7 @@ class ConnectionJson {
       final id = item['id'];
       final isFavorite = prefs.getBool('favorite_$id');
       if (isFavorite != null) {
-        item['isFavorite'] = isFavorite; // Sobrescribe el valor del JSON
+        item['favorite'] = isFavorite; // Sobrescribe el valor del JSON
       }
     }
 
