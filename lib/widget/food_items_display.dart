@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
-import 'package:provider/provider.dart';
 import 'package:recipe_app/Provider/favorite_provider.dart';
 import 'package:recipe_app/core/styles.dart';
 import 'package:recipe_app/data/models/infoRecipesModel.dart';

@@ -29,7 +29,7 @@ class RecipesModel {
   final String authorName;
   final List<Terms> terms;
   final String id;
-  final bool favorite;
+  bool favorite;
 
   RecipesModel({
     required this.title,

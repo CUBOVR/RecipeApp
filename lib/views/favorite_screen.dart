@@ -38,7 +38,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
             return ListView.builder(
               itemCount: favoriteItems.length,
               itemBuilder: (context, index) {
-                // String favorite = favoriteItems[index];
+                String favorite = favoriteItems[index];
                 return FutureBuilder(
                   future: _appRecipesInfo,
                   builder: (context, snapshot) {
@@ -51,7 +51,9 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                         ),
                       );
                     }
-                    // var favoriteItem = snapshot.data!;
+                    var favoriteItem = snapshot.data!['Recipes'].firstWhere(
+                      (recipe) => recipe.id == favorite,
+                    );
                     return Stack(
                       children: [
                         Padding(
@@ -71,11 +73,9 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                                   decoration: BoxDecoration(
                                     color: Colors.white,
                                     borderRadius: BorderRadius.circular(20),
-                                    // image: DecorationImage(
-                                    //   image: NetworkImage(
-                                    //     favoriteItem['image'],
-                                    //   ),
-                                    // ),
+                                    image: DecorationImage(
+                                      image: NetworkImage(favoriteItem.image),
+                                    ),
                                   ),
                                 ),
                               ],

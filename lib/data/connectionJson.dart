@@ -16,13 +16,13 @@ class ConnectionJson {
     final data = await loadAppInfo();
     final prefs = await SharedPreferences.getInstance();
 
-    final List<dynamic> recipes = data.recipes;
+    final List<RecipesModel> recipes = data.recipes;
 
     for (var item in recipes) {
-      final id = item['id'];
+      final id = item.id;
       final isFavorite = prefs.getBool('favorite_$id');
       if (isFavorite != null) {
-        item['favorite'] = isFavorite; // Sobrescribe el valor del JSON
+        item.favorite = isFavorite; // Sobrescribe el valor del JSON
       }
     }
 
