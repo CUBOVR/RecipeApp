@@ -3,7 +3,6 @@ import 'package:provider/provider.dart';
 import 'package:recipe_app/Provider/favorite_provider.dart';
 import 'package:recipe_app/core/styles.dart';
 import 'package:recipe_app/data/connectionJson.dart';
-import 'package:recipe_app/data/models/infoRecipesModel.dart';
 
 class FavoriteScreen extends StatefulWidget {
   const FavoriteScreen({super.key});
@@ -13,7 +12,7 @@ class FavoriteScreen extends StatefulWidget {
 }
 
 class _FavoriteScreenState extends State<FavoriteScreen> {
-  Future<Map<String, dynamic>>? _appRecipesInfo =
+  final Future<Map<String, dynamic>> _appRecipesInfo =
       ConnectionJson().getCombinedData();
   @override
   Widget build(BuildContext context) {
@@ -28,8 +27,6 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
       ),
       body: Consumer<FavoriteProvider>(
         builder: (context, provider, child) {
-          final favorites = provider.favorites;
-
           if (favoriteItems.isEmpty) {
             return const Center(
               child: Text(
@@ -41,7 +38,54 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
             return ListView.builder(
               itemCount: favoriteItems.length,
               itemBuilder: (context, index) {
-                String favorite = favoriteItems[index];
+                // String favorite = favoriteItems[index];
+                return FutureBuilder(
+                  future: _appRecipesInfo,
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return const Center(child: CircularProgressIndicator());
+                    } else if (!snapshot.hasData || snapshot.data == null) {
+                      return Center(
+                        child: Text(
+                          "Error loading favorites: ${snapshot.error}",
+                        ),
+                      );
+                    }
+                    // var favoriteItem = snapshot.data!;
+                    return Stack(
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.all(15),
+                          child: Container(
+                            padding: EdgeInsets.all(10),
+                            width: double.infinity,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(20),
+                              color: Colors.white,
+                            ),
+                            child: Row(
+                              children: [
+                                Container(
+                                  width: 100,
+                                  height: 80,
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.circular(20),
+                                    // image: DecorationImage(
+                                    //   image: NetworkImage(
+                                    //     favoriteItem['image'],
+                                    //   ),
+                                    // ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
+                    );
+                  },
+                );
               },
             );
           }

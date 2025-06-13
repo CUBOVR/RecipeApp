@@ -1,8 +1,3 @@
-import 'dart:convert';
-import 'dart:ffi';
-
-import 'package:flutter/foundation.dart';
-
 class InfoRecipesModel {
   final List<RecipesModel> recipes;
   final List<Categories> category;
@@ -34,7 +29,7 @@ class RecipesModel {
   final String authorName;
   final List<Terms> terms;
   final String id;
-  final Bool favorite;
+  final bool favorite;
 
   RecipesModel({
     required this.title,
