@@ -112,6 +112,23 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                             ),
                           ),
                         ),
+                        //for delete button
+                        Positioned(
+                          top: 60,
+                          right: 20,
+                          child: GestureDetector(
+                            onTap: () {
+                              setState(() {
+                                provider.toggleFavorite(favoriteItem);
+                              });
+                            },
+                            child: Icon(
+                              Icons.delete,
+                              color: Colors.red,
+                              size: 25,
+                            ),
+                          ),
+                        ),
                       ],
                     );
                   },
