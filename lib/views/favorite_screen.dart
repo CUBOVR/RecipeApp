@@ -62,7 +62,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                           padding: EdgeInsets.all(15),
                           child: Container(
                             padding: EdgeInsets.all(10),
-                            width: double.infinity,
+                            width: double.maxFinite,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(20),
                               color: Colors.white,
@@ -77,36 +77,36 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                                     borderRadius: BorderRadius.circular(20),
                                     image: DecorationImage(
                                       image: NetworkImage(favoriteItem.image),
+                                      fit: BoxFit.cover,
                                     ),
                                   ),
                                 ),
                                 SizedBox(width: 10),
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      favoriteItem.title,
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 16,
+                                Expanded(
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        favoriteItem.title,
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 16,
+                                        ),
+                                        overflow: TextOverflow.ellipsis,
+                                        maxLines: 1,
                                       ),
-                                    ),
-                                    SizedBox(height: 5),
-                                    Row(
-                                      children:
-                                          favoriteItem.terms
-                                              .map(
-                                                (term) =>
-                                                    construirWidgetsTermino(
-                                                      term,
-                                                    ),
-                                              )
-                                              .expand(
-                                                (widgetList) => widgetList,
-                                              )
-                                              .toList(),
-                                    ),
-                                  ],
+                                      SizedBox(height: 5),
+                                      Wrap(
+                                        spacing: 4,
+                                        runSpacing: 2,
+                                        children: [
+                                          for (var term in favoriteItem.terms)
+                                            ...construirWidgetsTermino(term),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ],
                             ),
