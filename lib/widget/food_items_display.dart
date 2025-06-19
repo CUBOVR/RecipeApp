@@ -3,6 +3,7 @@ import 'package:iconsax/iconsax.dart';
 import 'package:recipe_app/Provider/favorite_provider.dart';
 import 'package:recipe_app/core/styles.dart';
 import 'package:recipe_app/data/models/infoRecipesModel.dart';
+import 'package:recipe_app/views/recipe_detail_screen.dart';
 
 class FoodItemsDisplay extends StatefulWidget {
   final RecipesModel recipe;
@@ -17,7 +18,14 @@ class _FoodItemsDisplayState extends State<FoodItemsDisplay> {
   Widget build(BuildContext context) {
     final provider = FavoriteProvider.of(context);
     return GestureDetector(
-      onTap: () {},
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => RecipeDetailScreen(recipe: widget.recipe),
+          ),
+        );
+      },
       child: Container(
         margin: EdgeInsets.only(right: 10),
         width: 230,
