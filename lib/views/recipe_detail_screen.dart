@@ -58,7 +58,7 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
                 Positioned(
                   left: 0,
                   right: 0,
-                  top: MediaQuery.of(context).size.width,
+                  top: 330,
                   child: Container(
                     width: double.infinity,
                     padding: const EdgeInsets.all(20),
@@ -69,6 +69,79 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
                   ),
                 ),
               ],
+            ),
+            //for drag handle
+            Center(
+              child: Container(
+                width: 40,
+                height: 8,
+                decoration: BoxDecoration(
+                  color: Colors.grey.shade300,
+                  borderRadius: BorderRadius.circular(20),
+                ),
+              ),
+            ),
+            const SizedBox(height: 10),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    widget.recipe.title,
+                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                  ),
+                  const SizedBox(height: 10),
+                  Wrap(
+                    spacing: 4,
+                    runSpacing: 2,
+                    children: [
+                      for (var term in widget.recipe.terms)
+                        ...construirWidgetsTermino(term),
+                    ],
+                  ),
+                  const SizedBox(height: 10),
+                  //for rating
+                  Row(
+                    children: [
+                      Icon(Iconsax.star1, color: Colors.amber),
+                      SizedBox(width: 5),
+                      Text(
+                        (widget.recipe.rating.ratingValue).toStringAsFixed(2),
+                        style: const TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                      Text("/5 |"),
+                      SizedBox(width: 5),
+                      Text(
+                        "${widget.recipe.rating.ratingCount.toString()} Reviews",
+                        style: const TextStyle(color: Colors.blueGrey),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 20),
+                  Row(
+                    children: [
+                      Column(
+                        children: [
+                          Text(
+                            "Ingredients",
+                            style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          const SizedBox(height: 10),
+                          Text(
+                            "How many servings?",
+                            style: TextStyle(fontSize: 14, color: Colors.grey),
+                          ),
+                        ],
+                      ),
+                      Spacer(),
+                    ],
+                  ),
+                ],
+              ),
             ),
           ],
         ),
@@ -120,5 +193,49 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
         ],
       ),
     );
+  }
+
+  List<Widget> construirWidgetsTermino(Terms term) {
+    switch (term.slug) {
+      case 'time':
+        return [
+          iconAditional(Iconsax.clock),
+          aditionalInfo(term.display),
+          aditionalInfo(" - "),
+        ];
+      case 'skillLevel':
+        return [
+          iconAditional(Iconsax.flash),
+          aditionalInfo(term.display),
+          aditionalInfo(" - "),
+        ];
+      case 'vegetarian':
+      case 'vegan':
+      case 'gluten-free':
+        return [iconAditional(Iconsax.heart), aditionalInfo(term.display)];
+      case 'healthy':
+        return [
+          iconAditional(Iconsax.health),
+          aditionalInfo(term.display),
+          aditionalInfo(" - "),
+        ];
+      default:
+        return []; // No mostrar nada si no lo reconoces
+    }
+  }
+
+  Text aditionalInfo(String value) {
+    return Text(
+      value,
+      style: TextStyle(
+        fontSize: 16,
+        fontWeight: FontWeight.bold,
+        color: Colors.blueGrey,
+      ),
+    );
+  }
+
+  Icon iconAditional(IconData icon) {
+    return Icon(icon, size: 20, color: Colors.blueGrey);
   }
 }
