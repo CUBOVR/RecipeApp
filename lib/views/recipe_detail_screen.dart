@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:provider/provider.dart';
 import 'package:recipe_app/Provider/favorite_provider.dart';
+import 'package:recipe_app/Provider/quatify.dart';
 import 'package:recipe_app/core/styles.dart';
 import 'package:recipe_app/data/models/infoRecipesModel.dart';
 import 'package:recipe_app/widget/icon_button.dart';
+import 'package:recipe_app/widget/quantify_increment_decrement.dart';
 
 class RecipeDetailScreen extends StatefulWidget {
   final RecipesModel recipe;
@@ -17,6 +20,7 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
   @override
   Widget build(BuildContext context) {
     final provider = FavoriteProvider.of(context);
+    final quatifyProvider = Provider.of<QuatifyProvider>(context);
     return Scaffold(
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: startCookingAndFavoriteButton(provider),
@@ -122,6 +126,7 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
                   Row(
                     children: [
                       Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
                             "Ingredients",
@@ -138,6 +143,11 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
                         ],
                       ),
                       Spacer(),
+                      QuantifyIncrementDecrement(
+                        currentNumber: quatifyProvider.currentNumber,
+                        onAdd: () => quatifyProvider.increaseQuantify(),
+                        onRemove: () => quatifyProvider.decreaseQuantify(),
+                      ),
                     ],
                   ),
                 ],
