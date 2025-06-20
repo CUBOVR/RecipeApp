@@ -27,12 +27,15 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
             Stack(
               children: [
                 //for image
-                Container(
-                  height: MediaQuery.of(context).size.height / 2.1,
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                      fit: BoxFit.cover,
-                      image: NetworkImage(widget.recipe.image),
+                Hero(
+                  tag: widget.recipe.image,
+                  child: Container(
+                    height: MediaQuery.of(context).size.height / 2.1,
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        fit: BoxFit.cover,
+                        image: NetworkImage(widget.recipe.image),
+                      ),
                     ),
                   ),
                 ),
@@ -50,6 +53,19 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
                       const Spacer(),
                       MyIconButton(icon: Iconsax.notification, pressed: () {}),
                     ],
+                  ),
+                ),
+                Positioned(
+                  left: 0,
+                  right: 0,
+                  top: MediaQuery.of(context).size.width,
+                  child: Container(
+                    width: double.infinity,
+                    padding: const EdgeInsets.all(20),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(20),
+                    ),
                   ),
                 ),
               ],
