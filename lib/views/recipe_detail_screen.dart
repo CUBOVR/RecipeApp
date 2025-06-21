@@ -18,6 +18,22 @@ class RecipeDetailScreen extends StatefulWidget {
 
 class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
   @override
+  void initState() {
+    super.initState();
+    //initialize base ingredient amounts in the provider
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      List<double> baseAmounts =
+          widget.recipe.ingredientsAmount
+              .map<double>((amount) => double.parse(amount.toString()))
+              .toList();
+      Provider.of<QuatifyProvider>(
+        context,
+        listen: false,
+      ).setBaseIngredientAmounts(baseAmounts);
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     final provider = FavoriteProvider.of(context);
     final quatifyProvider = Provider.of<QuatifyProvider>(context);
@@ -43,7 +59,7 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
                     ),
                   ),
                 ),
-                //for top buttons
+                //for top back buttons
                 Positioned(
                   top: 40,
                   left: 10,
@@ -62,7 +78,7 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
                 Positioned(
                   left: 0,
                   right: 0,
-                  top: 330,
+                  top: 330, //MediaQuery.of(context).size.width
                   child: Container(
                     width: double.infinity,
                     padding: const EdgeInsets.all(20),
@@ -108,8 +124,8 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
                   //for rating
                   Row(
                     children: [
-                      Icon(Iconsax.star1, color: Colors.amber),
-                      SizedBox(width: 5),
+                      const Icon(Iconsax.star1, color: Colors.amber),
+                      const SizedBox(width: 5),
                       Text(
                         (widget.recipe.rating.ratingValue).toStringAsFixed(2),
                         style: const TextStyle(fontWeight: FontWeight.bold),
@@ -125,7 +141,7 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
                   const SizedBox(height: 20),
                   Row(
                     children: [
-                      Column(
+                      const Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
@@ -135,14 +151,14 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
                               fontWeight: FontWeight.bold,
                             ),
                           ),
-                          const SizedBox(height: 10),
+                          SizedBox(height: 10),
                           Text(
                             "How many servings?",
                             style: TextStyle(fontSize: 14, color: Colors.grey),
                           ),
                         ],
                       ),
-                      Spacer(),
+                      const Spacer(),
                       QuantifyIncrementDecrement(
                         currentNumber: quatifyProvider.currentNumber,
                         onAdd: () => quatifyProvider.increaseQuantify(),
@@ -150,6 +166,84 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
                       ),
                     ],
                   ),
+                  const SizedBox(height: 10),
+                  //list of ingredients
+                  Column(
+                    children: [
+                      Row(
+                        children: [
+                          //ingredients images
+                          Column(
+                            children:
+                                widget.recipe.ingredientsImage
+                                    .map<Widget>(
+                                      (imageUrl) => Container(
+                                        height: 60,
+                                        width: 60,
+                                        margin: const EdgeInsets.only(
+                                          bottom: 10,
+                                        ),
+                                        decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(
+                                            15,
+                                          ),
+                                          image: DecorationImage(
+                                            fit: BoxFit.cover,
+                                            image: NetworkImage(imageUrl),
+                                          ),
+                                        ),
+                                      ),
+                                    )
+                                    .toList(),
+                          ),
+                          const SizedBox(width: 20),
+                          //ingredients name
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children:
+                                widget.recipe.ingredientsName
+                                    .map<Widget>(
+                                      (ingredient) => SizedBox(
+                                        height: 70,
+                                        child: Center(
+                                          child: Text(
+                                            ingredient,
+                                            style: TextStyle(
+                                              fontSize: 16,
+                                              color: Colors.grey.shade400,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    )
+                                    .toList(),
+                          ),
+                          //ingredient amount
+                          const Spacer(),
+                          Column(
+                            children:
+                                quatifyProvider.updateIngredientAmounts
+                                    .map<Widget>(
+                                      (amount) => SizedBox(
+                                        height: 70,
+                                        child: Center(
+                                          child: Text(
+                                            "${amount}gm",
+                                            style: TextStyle(
+                                              fontSize: 16,
+                                              color: Colors.grey.shade400,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    )
+                                    .toList(),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 80),
                 ],
               ),
             ),
