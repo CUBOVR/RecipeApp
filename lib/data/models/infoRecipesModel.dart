@@ -30,6 +30,9 @@ class RecipesModel {
   final List<Terms> terms;
   final String id;
   bool favorite;
+  List<double> ingredientsAmount;
+  final List<String> ingredientsImage;
+  final List<String> ingredientsName;
 
   RecipesModel({
     required this.title,
@@ -43,6 +46,9 @@ class RecipesModel {
     required this.terms,
     required this.id,
     required this.favorite,
+    required this.ingredientsAmount,
+    required this.ingredientsImage,
+    required this.ingredientsName,
   });
 
   factory RecipesModel.fromJSON(Map<String, dynamic> json) {
@@ -58,6 +64,20 @@ class RecipesModel {
       terms: (json["terms"] as List).map((e) => Terms.fromJSON(e)).toList(),
       id: json["id"],
       favorite: json['favorite'],
+      ingredientsAmount:
+          (json['ingredientsAmount'] as List)
+              .map((e) => (e as num).toDouble())
+              .toList(),
+      ingredientsImage:
+          (json['ingredientsImage'] as List<dynamic>?)
+              ?.map((e) => e.toString())
+              .toList() ??
+          [],
+      ingredientsName:
+          (json['ingredientsName'] as List<dynamic>?)
+              ?.map((e) => e.toString())
+              .toList() ??
+          ["NA", "NA"],
     );
   }
 }
